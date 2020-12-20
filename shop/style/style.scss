@@ -1,0 +1,97 @@
+@import '_variables.scss';
+
+body{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: $mainFont;
+}
+
+.wrapper{
+    display: flex;
+    .center{
+        width: 100%;
+    }
+}
+
+.leftNav {
+    width: 100px;
+    background-color: rgb(15, 15, 15);
+    display: flex;
+    justify-content: center;
+    i {
+        color: $mainColor;
+        font-size: 40px;
+        width: 40px;
+        margin-top: 20px;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 20px;
+    max-width: 1140px;
+}
+
+.mainHeader {
+    background-color: rgb(233, 233, 233);
+    height: 70px;
+    margin-bottom: 50px;
+    .container{
+        height: inherit;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+    .cart-button {
+        @include mainButton(18px, 400, 10px);
+    }
+}
+
+.goods-list{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    row-gap: 30px;
+    column-gap: 20px;
+    justify-items: center;
+    margin-bottom: 30px;
+    @media (max-width: 930px){
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 720px){
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 520px){
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .goods-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        background-size: 100% 78%;
+        background-position: center top;
+        background-repeat: no-repeat;
+        text-align: center;
+        width: 180px;
+        height: 330px;
+        &:hover {
+            box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+        }
+        .title-price {
+            display: flex;
+            justify-content: space-between;
+            h4 {
+                margin: 10px;
+                color: $mainColor;
+                text-transform: uppercase;
+            }
+            p {
+                margin: 10px;
+            }
+        }
+        .buy-btn {
+            @include mainButton(12px, 300, 5px);
+            margin: 0 10px 10px 10px;
+        }
+    }
+}
