@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fastFood</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h3>HAMBURGER consrtuctor</h3>
+        </div>
+        <div class="constructor">
+            <section class="size">
+                <h3>SIZE</h3>
+                <input name="size" type="radio" value="small" checked>small
+                <input name="size" type="radio" value="big">big
+            </section>
+            <section class="stuffing">
+                <h3>STUFFING</h3>
+                <input name="stuffing" type="radio" value="cheese" checked>cheese
+                <input name="stuffing" type="radio" value="salad">salad
+                <input name="stuffing" type="radio" value="potato">potato
+            </section>
+            <section class="topping">
+                <h3>TOPPING</h3>
+                <input name="topping" type="checkbox" value="spices" checked>spices
+                <input name="topping" type="checkbox" value="mayonnaise">mayonnaise
+                <input name="topping" type="checkbox" value="ketchup">ketchup
+            </section>
+        </div>
+        <div class="result">
+            <section class="price">
+                <h3>PRICE</h3>
+                <div name="outPrice"></div>
+            </section>
+            <section class="calories">
+                <h3>CALORIES</h3>
+                <div name="outCalories"></div>
+            </section>
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>
