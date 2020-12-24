@@ -67,8 +67,7 @@ class GoodsList {
      * выводит в консоль общую стоимость всех товаров массива goods
      */
     printTotalCost() {
-        let totalCost = 0;
-        this.goods.forEach(item => totalCost += item.price);
+        let totalCost = this.goods.reduce((sum, item) => sum += item.price, 0);
         console.log(totalCost);
     }
 }
