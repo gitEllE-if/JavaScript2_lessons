@@ -1,9 +1,9 @@
 class GoodsItem {
     static class = 'goods-item';
 
-    constructor(good = { id: 0, title: 'product', price: 0 }) {
-        this.id = good.id;
-        this.title = good.title;
+    constructor(good = { id_product: 0, product_name: 'product', price: 0 }) {
+        this.id = good.id_product;
+        this.title = good.product_name;
         this.price = good.price;
     }
 
@@ -26,26 +26,19 @@ class GoodsList {
     constructor(container = '.goods-list') {
         this.container = container;
         this.goods = [];
-        this._fetchGoods();
-        this.printTotalCost();
+        this._getProducts()
+            .then(data => {
+                this.goods = [...data];
+                this.render();
+            });
     }
 
-    _fetchGoods() {
-        this.goods = [
-            { id: 1, title: 'suit', price: 150 },
-            { id: 2, title: 'dress', price: 90 },
-            { id: 3, title: 'coat', price: 350 },
-            { id: 4, title: 'jacket', price: 50 },
-            { id: 5, title: 'blaser', price: 110 },
-            { id: 6, title: 'jacket', price: 250 },
-            { id: 7, title: 'top', price: 250 },
-            { id: 8, title: 'dress', price: 350 },
-            { id: 9, title: 'suit', price: 60 },
-            { id: 10, title: 'suit', price: 50 },
-            { id: 11, title: 'dress', price: 110 },
-            { id: 12, title: 'dress', price: 250 }
-        ];
+    _getProducts() {
+        return fetch(`${API}/catalogData.json`)
+            .then(result => result.json())
+            .catch(error => console.log(error));
     }
+
     /**
     * отображает товары на странице
     */
@@ -57,9 +50,15 @@ class GoodsList {
         });
         document.querySelector(this.container).innerHTML = listHtml;
 
+        // images
         let goodsItem = document.querySelectorAll(`.${GoodsItem.class}`);
         goodsItem.forEach((elem, idx) => {
             elem.style.backgroundImage = `url('img/product${elem.dataset.id}.jpg')`;
+        });
+
+        // eventListeners
+        document.querySelectorAll(`.buy-btn`).forEach((item) => {
+            item.addEventListener('click', cart.addToCart.bind(cart));
         });
     }
 
@@ -67,11 +66,7 @@ class GoodsList {
      * выводит в консоль общую стоимость всех товаров массива goods
      */
     printTotalCost() {
-        let totalCost = 0;
-        this.goods.forEach(item => totalCost += item.price);
+        let totalCost = this.goods.reduce((sum, item) => sum += item.price, 0);
         console.log(totalCost);
     }
 }
-
-const list = new GoodsList();
-list.render();
