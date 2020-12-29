@@ -1,0 +1,8 @@
+.myDiv {
+    font-family: Arial, Helvetica, sans-serif;
+    white-space: pre;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+}
