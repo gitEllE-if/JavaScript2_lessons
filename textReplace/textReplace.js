@@ -10,5 +10,6 @@ leftDivEl.innerHTML += strOrigin; // выводим исходный текст
 
 
 // Задание 2: Замена кавычек на границах предложения с прямой речью
-strOrigin = strOrigin.replace(/( )\'/g, '$1"');
-rightDivEl.innerHTML += strOrigin.replace(/([\.\?])\'/g, '$1"');
+// strOrigin = strOrigin.replace(/( )\'/g, '$1"');
+// rightDivEl.innerHTML += strOrigin.replace(/([\.\?])\'/g, '$1"');
+rightDivEl.innerHTML += strOrigin.replace(/\B\'|\'\B/g, '"');
