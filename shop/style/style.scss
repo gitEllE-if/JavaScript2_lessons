@@ -8,6 +8,7 @@ body{
 }
 
 .wrapper{
+    min-height: 100vh;
     display: flex;
     .center{
         width: 100%;
@@ -37,18 +38,71 @@ body{
     background-color: rgb(233, 233, 233);
     height: 70px;
     margin-bottom: 50px;
+    @media (max-width: 720px){
+        height: 140px;
+    }
     .container{
         height: inherit;
         display: flex;
-        justify-content: flex-end;
+        justify-content: space-between;
         align-items: center;
-    }
-    .cart-button {
-        @include mainButton(18px, 400, 10px);
+        a {
+            text-decoration: none;
+            color: $mainColor;
+            font-size: 18px;
+        }
+        .cartHeader {
+            @media (max-width: 720px){
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: flex-end;
+                margin-left: 30px;
+            }
+            .search-form{
+                position: relative;
+                margin-right: 50px;
+                display: inline-block;
+                @media (max-width: 720px){
+                    margin-right: initial;
+                    margin-top: 30px;
+                }
+                .search-field:focus{
+                    outline: none;
+                }
+                .search-field {
+                    box-sizing: border-box;
+                    width: 200px;
+                    padding: 10px;
+                    background-color: transparent;
+                    border: none;
+                    border-bottom: 2px solid $mainColor;
+                    @media (max-width: 720px){
+                        width: auto;
+                    }
+                }
+                .btn-search {
+                    background-color: transparent;
+                    border: none;
+                    color: $mainColor;
+                    font-size: 1.2em;
+                    position: absolute;
+                    bottom: 5px;
+                    right: 0;
+                    outline: none;
+                    cursor: pointer;
+                }
+            }
+            .btn-cart {
+                @include mainButton(16px, 400, 10px);
+                @media (max-width: 720px){
+                    width: 100px;
+                }
+            }
+        }
     }
 }
 
-.goods-list{
+.products{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     row-gap: 30px;
@@ -64,16 +118,17 @@ body{
     @media (max-width: 520px){
         grid-template-columns: repeat(1, 1fr);
     }
-    .goods-item {
+    .product-item {
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        background-size: 100% 78%;
-        background-position: center top;
-        background-repeat: no-repeat;
         text-align: center;
         width: 180px;
-        height: 330px;
+        height: 310px;
+        img {
+            width: 90%;
+            align-self: center;
+        }
         &:hover {
             box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
         }
@@ -94,4 +149,74 @@ body{
             margin: 0 10px 10px 10px;
         }
     }
+}
+
+.cartHeader{
+    position: relative;
+    .cart-block {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.62);
+        border-radius: 5px;
+        box-sizing: border-box;
+        right: 0;
+        top: 130%;
+        position: absolute;
+        background-color: white;
+        padding: 20px;
+        color: black;
+        width: 310px;
+        &:before{
+            content: '';
+            width: 0;
+            height: 0;
+            position: absolute;
+            top: -10px;
+            right: 35px;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid white;
+        }
+    }
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-child){
+        margin-bottom: 20px;
+        border-bottom: 1px solid rgb(233, 233, 233);
+    }
+    .cart-left{
+        display: flex;
+        img {
+            align-self: flex-start;
+            margin-right: 15px;
+            width: 40%;
+        }
+        .product-desc{
+            max-width: 150px;
+            font-size: 12px;
+            .product-title {
+                color: $mainColor;
+                text-transform: uppercase;
+                font-size: 14px;
+            }
+            .product-quantity {
+                margin-top: 15px;
+            }
+        }
+    }
+    .cart-right{
+        text-align: right;
+        .product-price{
+            margin-left: 30px;
+        }
+        .btn-del {
+            @include mainButton(12px, 300, 5px);
+            margin: 10px;
+        }
+    }
+}
+
+.invisible{
+    display: none !important;
 }

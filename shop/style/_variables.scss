@@ -20,6 +20,10 @@ $mainFont: Lato, sans-serif;
         background-position: 0 0;
         color:#fff;
     }
+    &:active {
+        transform: translateY(4px);
+        color:black;
+    }
 }
 
 @mixin mainButton($_textSize: 14px, $_textWeight: 400, $_padding: 10px) {
