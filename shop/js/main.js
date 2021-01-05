@@ -1,20 +1,7 @@
-function openCart() {
-    let elem = document.querySelector('.goods-list');
-    if (elem) {
-        elem.classList.toggle('goods-list');
-        elem.classList.toggle('cart-list');
-        cart.render();
-    }
-}
+const list2 = {
+    ProductsList: ProductItem,
+    Cart: CartItem
+};
 
-function openCatalog() {
-    let elem = document.querySelector('.cart-list');
-    if (elem) {
-        elem.classList.toggle('cart-list');
-        elem.classList.toggle('goods-list');
-        list.render();
-    }
-}
-
-const cart = new CartList();
-const list = new GoodsList();
+let cart = new Cart();
+let products = new ProductsList(cart);

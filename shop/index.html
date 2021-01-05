@@ -17,19 +17,29 @@
         <div class="center">
             <header class="mainHeader">
                 <div class="container">
-                    <a href="#" onclick="openCatalog()">Главная</a>
-                    <button class="cart-button" type="button" onclick="openCart()">корзина</button>
+                    <a href="#">Главная</a>
+                    <div class="cartHeader">
+                        <form action="#" class="search-form">
+                            <input type="text" class="search-field">
+                            <button class="btn-search" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </form>
+                        <button class="btn-cart" type="button">корзина</button>
+                        <div class="cart-block invisible"></div>
+                    </div>
                 </div>
             </header>
             <main>
                 <div class="container">
-                    <div class="goods-list"></div>
+                    <div class="products"></div>
                 </div>
             </main>
         </div>
     </div>
     <script src="js/config.js"></script>
-    <script src="js/goodsList.js"></script>
+    <script src="js/Item_List.js"></script>
+    <script src="js/productList.js"></script>
     <script src="js/shoppingСart.js"></script>
     <script src="js/main.js"></script>
 </body>

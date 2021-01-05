@@ -1,112 +1,97 @@
-class CartItem {
-    static class = 'cart-item';
-
-    constructor(good = { id_product: 0, product_name: 'product', price: 0, quantity: 1 }) {
-        this.id = good.id_product;
-        this.title = good.product_name;
-        this.price = good.price;
-        this.quantity = good.quantity;
+class Cart extends List {
+    constructor(container = ".cart-block", url = "/getBasket.json") {
+        super(url, container);
+        this.getJson()
+            .then(data => {
+                this.handleData(data.contents);
+            });
     }
 
-    /**
-     * возвращает html разметку для одного товара
-     */
-    render() {
-        return `<div class="${CartItem.class}" data-id="${this.id}">
-            <div class="title-price">
-                <h4>${this.title}</h4>
-                <p><b>$${this.price}</b></p>
-                <p>количество:  <b>${this.quantity}</b></p>
-            </div>
-            <button class="del-btn">удалить</button>
-            </div>`;
+    addProduct(element) {
+        this.getJson(`${API}/addToBasket.json`)
+            .then(data => {
+                if (data.result === 1) {
+                    let productId = +element.dataset['id'];
+                    let find = this.allProducts.find(product => product.id_product === productId);
+                    if (find) {
+                        find.quantity++;
+                        this._updateCart(find);
+                    } else {
+                        let product = {
+                            id_product: productId,
+                            price: +element.dataset['price'],
+                            product_name: element.dataset['name'],
+                            quantity: 1
+                        };
+                        this.goods = [product];
+                        this.render();
+                    }
+                } else {
+                    alert('Error');
+                }
+            })
     }
+
+    removeProduct(element) {
+        this.getJson(`${API}/deleteFromBasket.json`)
+            .then(data => {
+                if (data.result === 1) {
+                    let productId = +element.dataset['id'];
+                    let find = this.allProducts.find(product => product.id_product === productId);
+                    if (find.quantity > 1) {
+                        find.quantity--;
+                        this._updateCart(find);
+                    } else {
+                        this.allProducts.splice(this.allProducts.indexOf(find), 1);
+                        document.querySelector(`.cart-item[data-id="${productId}"]`).remove();
+                    }
+                } else {
+                    alert('Error');
+                }
+            })
+    }
+
+    _updateCart(product) {
+        let block = document.querySelector(`.cart-item[data-id="${product.id_product}"]`);
+        block.querySelector('.product-quantity').textContent = `Quantity: ${product.quantity}`;
+        block.querySelector('.product-price').textContent = `$${product.quantity * product.price}`;
+    }
+
+    _init() {
+        document.querySelector('.btn-cart').addEventListener('click', () => {
+            document.querySelector(this.container).classList.toggle('invisible');
+        });
+        document.querySelector(this.container).addEventListener('click', e => {
+            if (e.target.classList.contains('btn-del')) {
+                this.removeProduct(e.target);
+            }
+        })
+    }
+
 }
 
-class CartList {
-    constructor(container = '.cart-list') {
-        this.container = container;
-        this.goods = [];
-        this._getProducts()
-            .then(data => {
-                this.goods = [...data.contents];
-            });
+class CartItem extends Item {
+    constructor(el) {
+        super(el);
+        this.quantity = el.quantity;
     }
 
-    _getProducts() {
-        return fetch(`${API}/getBasket.json`)
-            .then(result => result.json())
-            .catch(error => console.log(error));
-    }
-
-    /**
-    * отображает товары на странице
-    */
     render() {
-        let listHtml = '';
-        this.goods.forEach(good => {
-            const goodItem = new CartItem(good);
-            listHtml += goodItem.render();
-        });
-        document.querySelector(this.container).innerHTML = listHtml;
-
-        // imaes
-        let goodsItem = document.querySelectorAll(`.${CartItem.class}`);
-        goodsItem.forEach((elem, idx) => {
-            elem.style.backgroundImage = `url('img/product${elem.dataset.id}.jpg')`;
-        });
-
-        // eventListeners
-        document.querySelectorAll(`.del-btn`).forEach((item) => {
-            item.addEventListener('click', cart.removeFromCart.bind(cart));
-        });
+        return `<div class="cart-item" data-id="${this.id_product}">
+                    <div class="cart-left">
+                        <img src="${this.img}" alt="Product image">
+                        <div class="product-desc">
+                            <p class="product-title"><b>${this.product_name}</b></p>
+                            <p class="product-quantity">Количество: ${this.quantity}</p>
+                            <p class="product-single-price">Цена: $${this.price}</p>
+                        </div>
+                    </div>
+                    <div class="cart-right">
+                        <p class="product-price">$${this.quantity * this.price}</p>
+                        <button class="btn-del" data-id="${this.id_product}">
+                            &times;
+                        </button>
+                    </div>
+                </div>`
     }
-
-    /**
-     * Добавляет в корзину продукт с полученным data-id из элемента, по которому кликнули
-     * @param {MouseEvent} event 
-     */
-    addToCart(event) {
-        let id = event.target.parentNode.dataset.id;
-        let cnt = 0;
-        this.goods.forEach(item => {
-            if (item.id_product == id) {
-                item.quantity++;
-                cnt++;
-            }
-        });
-        if (cnt == 0) {
-            list.goods.forEach(item => {
-                if (id == item.id_product) {
-                    item.quantity = 1;
-                    this.goods.push(item);
-                }
-            });
-        }
-    }
-
-    /**
-     * Удаляет из корзину продукт с полученным data-id из элемента, по которому кликнули
-     * @param {MouseEvent} event 
-     */
-    removeFromCart(event) {
-        let id = event.target.parentNode.dataset.id;
-        this.goods.forEach((item, idx) => {
-            if (item.id_product == id) {
-                if (item.quantity > 1) {
-                    item.quantity--;
-                }
-                else {
-                    this.goods.splice(idx, 1);
-                }
-            }
-        });
-        this.render();
-    }
-
-    // applyDiscount(discount) { }
-
-    // cancelDiscount() { }
-
-    // getTotalCost() { }
 }
