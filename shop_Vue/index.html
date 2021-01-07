@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eShop</title>
+    <link rel="stylesheet" href="style/style.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <div class="wrapper">
+            <div class="leftNav">
+                <i class="far fa-heart"></i>
+            </div>
+            <div class="center">
+                <header class="mainHeader">
+                    <div class="container">
+                        <a href="#">Главная</a>
+                        <div class="cartHeader">
+                            <form action="#" class="search-form">
+                                <input type="text" class="search-field" v-model="searchLine">
+                                <button class="btn-search" type="submit" @click="filter()">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </form>
+                            <button class="btn-cart" type="button" @click="showHideCart()">корзина</button>
+                            <div class="cart-block" v-if="isVisibleCart">
+                                <div class="cart-item" v-for="product of addedToCart" :key="product.id_product"
+                                    :data-id="product.id_product">
+                                    <div class="cart-left">
+                                        <img :src=`${imgPath}${product.id_product}.jpg` alt="Product img">
+                                        <div class="product-desc">
+                                            <p class="product-title"><b>{{ product.product_name }}</b></p>
+                                            <p class="product-quantity">Количество: {{ product.quantity }}</p>
+                                            <p class="product-single-price">Цена: ${{ product.price }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="cart-right">
+                                        <p class="product-price">${{ product.price * product.quantity }}</p>
+                                        <button class="btn-del" :data-id="product.id_product"
+                                            @click="removeProduct(product)">
+                                            &times;
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="empty-cart" v-if="isEmptyCart">
+                                    Корзина пустая
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <main>
+                    <div class="container">
+                        <div class="products">
+                            <div class="product-item" v-for="product of products" :key="product.id_product"
+                                :data-id="product.id_product">
+                                <img :src=`${imgPath}${product.id_product}.jpg` alt="Product img">
+                                <div class="title-price">
+                                    <h4>{{ product.product_name }}</h4>
+                                    <p>${{ product.price }}</p>
+                                </div>
+                                <button class="buy-btn" :data-id="product.id_product" :data-name="product.product_name"
+                                    :data-price="product.price" @click="addProduct(product)">
+                                    в корзину
+                                </button>
+                            </div>
+                            <div class="not-found" v-if="isNotFoundProducts">
+                                Товары не найдены
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>
