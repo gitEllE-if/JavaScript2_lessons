@@ -224,6 +224,7 @@ body {
 
 .products .product-item img {
   width: 90%;
+  height: 72%;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center;

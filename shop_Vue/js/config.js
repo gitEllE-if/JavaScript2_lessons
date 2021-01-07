@@ -1,1 +1,2 @@
 const API = 'https://raw.githubusercontent.com/GeekBrainsTutorial/online-store-api/master/responses';
+const myAPI = 'https://raw.githubusercontent.com/gitEllE-if/JavaScript2_lessons/main/json/getProducts.json';

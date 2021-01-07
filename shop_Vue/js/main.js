@@ -89,6 +89,15 @@ const app = new Vue({
             .then(() => {
                 this.isNotFoundProducts = this.products.length == 0 ? true : false;
             });
+        this.getJson(myAPI)
+            .then(data => {
+                for (let el of data) {
+                    this.products.push(el);
+                }
+            })
+            .then(() => {
+                this.isNotFoundProducts = this.products.length == 0 ? true : false;
+            });
         this.getJson(`getProducts.json`)
             .then(data => {
                 for (let el of data) {
