@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <form action="#" id="myForm">
+        <input class="inputValid" type="text" name="inName" id="inName"
+            placeholder="name (not less than 2 letters)"><br>
+        <br>
+        <input class="inputValid" type="tel" name="inPhone" id="inPhone" placeholder="+7(000)000-0000"><br>
+        <br>
+        <input class="inputValid" type="email" name="inMail" id="inMail" placeholder="mymail@mail.ru"><br>
+        <br>
+        <textarea class="inputValid" name="inText" id="inText" cols="30" rows="10"
+            placeholder="any text"></textarea><br>
+        <br>
+        <button type="submit" id="val-btn">Отправить</button>
+    </form>
+    <script src="formValid.js"></script>
+    <script>
+        window.onload = () => {
+            document.getElementById('myForm').addEventListener('submit', e => {
+                let valid = new Validator('myForm');
+                if (!valid.valid) {
+                    e.preventDefault();
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
