@@ -61,3 +61,11 @@ button {
     color: white;
     border-radius: 10px;
 }
+
+.invalid{
+    border-color: var(--alertColor);
+}
+
+.valid{
+    border-color: #94bbe9;
+}
