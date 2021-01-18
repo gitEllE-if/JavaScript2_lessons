@@ -7,8 +7,8 @@ const app = new Vue({
         products: [],
         filtered: [],
         addedToCart: [],
-        searchLine: '',
         isVisibleCart: false,
+        isVisibleError: false
     },
     methods: {
         getJson(url) {
@@ -18,8 +18,8 @@ const app = new Vue({
                     console.log(error);
                 })
         },
-        filter() {
-            const regexp = new RegExp(this.searchLine, 'i');
+        filter(searchLine) {
+            const regexp = new RegExp(searchLine, 'i');
             this.filtered = this.products.filter(product => regexp.test(product.product_name));
         },
         showHideCart() {
@@ -38,7 +38,7 @@ const app = new Vue({
                         }
                         this.isVisibleCart = true;
                     } else {
-                        alert('Error');
+                        this.isVisibleError = true;
                     }
                 })
         },
@@ -56,7 +56,7 @@ const app = new Vue({
                             }
                         }
                     } else {
-                        alert('Error');
+                        this.isVisibleError = true;
                     }
                 })
         }
