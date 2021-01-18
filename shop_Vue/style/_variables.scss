@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+
+$mainColor: #10bfc5;
+
+$mainFont: Lato, sans-serif;
+
+%sampleButton {
+    font-family: $mainFont;
+    color: $mainColor;
+    text-decoration: none;
+    text-align: center;
+    background-image: linear-gradient(to left, white, white 50%, $mainColor 50%, $mainColor);
+    background-position: 100% 0;
+    background-size: 200% 100%;
+    transition: all .25s ease-in;
+    border: 2px solid $mainColor;
+    border-radius: 10px;
+    outline: none;
+    &:hover {
+        background-position: 0 0;
+        color:#fff;
+    }
+    &:active {
+        transform: translateY(4px);
+        color:black;
+    }
+}
+
+@mixin mainButton($_textSize: 14px, $_textWeight: 400, $_padding: 10px) {
+    @extend %sampleButton;
+    font-weight: $_textWeight;
+    font-size: $_textSize;
+    padding: $_padding;
+}
