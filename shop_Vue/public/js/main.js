@@ -8,7 +8,8 @@ const app = new Vue({
         filtered: [],
         addedToCart: [],
         isVisibleCart: false,
-        isVisibleError: false
+        isVisibleError: false,
+        year: new Date().getFullYear()
     },
     methods: {
         getJson(url) {
