@@ -1,18 +1,4 @@
-Vue.component('cart', {
-    props: ['cartItems', 'imgPath', 'isVisible'],
-    template: `<div class="cart-block" v-show="isVisible">
-                    <cart-item v-for="item of cartItems"
-                        :key="item.id_product"
-                        :img="(imgPath + item.id_product + '.jpg')"
-                        :cart-item="item">
-                    </cart-item>
-                    <div class="empty-cart" v-if="!cartItems.length">
-                        Корзина пустая
-                    </div>
-                </div>`
-});
-
-Vue.component('cart-item', {
+const cartItem = {
     props: ['img', 'cartItem'],
     template: `<div class="cart-item">
                     <div class="cart-left">
@@ -28,4 +14,21 @@ Vue.component('cart-item', {
                         <button class="del-btn" @click="$parent.$emit('remove-product', cartItem)">&times;</button>
                     </div>
                 </div>`
-})
+};
+
+const cart = {
+    props: ['cartItems', 'imgPath', 'isVisible'],
+    components: { 'cart-item': cartItem },
+    template: `<div class="cart-block" v-show="isVisible">
+                    <cart-item v-for="item of cartItems"
+                        :key="item.id_product"
+                        :img="(imgPath + item.id_product + '.jpg')"
+                        :cart-item="item">
+                    </cart-item>
+                    <div class="empty-cart" v-if="!cartItems.length">
+                        Корзина пустая
+                    </div>
+                </div>`
+};
+
+export default cart;

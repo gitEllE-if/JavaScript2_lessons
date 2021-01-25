@@ -1,4 +1,9 @@
-const app = new Vue({
+import search from './searchComponent';
+import cart from './cartComponent';
+import products from './productComponent';
+import error from './errorComponent'
+
+const app = {
     el: '#app',
     data: {
         catalogUrl: '/api/products',
@@ -11,6 +16,7 @@ const app = new Vue({
         isVisibleError: false,
         year: new Date().getFullYear()
     },
+    components: { cart, products, search, error },
     methods: {
         getJson(url) {
             return fetch(url)
@@ -121,4 +127,6 @@ const app = new Vue({
                 }
             });
     }
-});  
+};
+
+export default app;

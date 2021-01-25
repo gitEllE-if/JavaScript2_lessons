@@ -245,6 +245,7 @@ body {
 }
 
 .products .product-item .title-price h4 {
+  font-size: 12px;
   margin: 10px;
   color: #10bfc5;
   text-transform: uppercase;
