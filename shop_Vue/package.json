@@ -1,13 +1,11 @@
 {
-  "name": "JS-8",
+  "name": "shop",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "buildDev": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
-    "buildProd": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
-    "start": "nodemon dist/server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && webpack --mode development --config webpack.server.config.js && webpack --mode development --config webpack.dev.config.js",
+    "start": "node dist/server/server.js"
   },
   "keywords": [],
   "author": "",

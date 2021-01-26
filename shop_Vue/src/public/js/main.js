@@ -91,24 +91,21 @@ const app = {
             }
         },
         removeProduct(element) {
-            let find = this.addedToCart.find(product => product.id_product === element.id_product);
-            if (find.quantity > 1) {
-                this.putJson(`${this.basketUrl}/${find.id_product}`, { quantity: -1 })
-                    .then(data => {
-                        if (data.result === 1) {
-                            find.quantity--;
-                        }
-                    })
-            } else {
-                this.deleteJson(`${this.basketUrl}/${find.id_product}`, { quantity: 1 })
-                    .then(data => {
-                        if (data.result === 1) {
-                            this.addedToCart.splice(this.addedToCart.indexOf(find), 1);
-                            if (this.addedToCart.length == 0) {
-                                this.isVisibleCart = false;
+            for (let i = 0; i < this.addedToCart.length; i++) {
+                if (this.addedToCart[i].id_product === +element.id_product) {
+                    this.deleteJson(`${this.basketUrl}/${this.addedToCart[i].id_product}`, this.addedToCart[i])
+                        .then(data => {
+                            if (data.result === 1) {
+                                this.addedToCart[i].quantity -= 1;
+                                if (this.addedToCart[i].quantity === 0) {
+                                    this.addedToCart.splice(i, 1);
+                                    if (this.addedToCart.length == 0) {
+                                        this.isVisibleCart = false;
+                                    }
+                                }
                             }
-                        }
-                    })
+                        })
+                }
             }
         }
     },
