@@ -1,4 +1,4 @@
-Vue.component('error', {
+const error = {
     props: ['isVisible'],
     template: `<div class="error-block" v-show="isVisible">
                     <div class="errorText">
@@ -8,4 +8,6 @@ Vue.component('error', {
                         <i class="far fa-times-circle"></i>
                     </button>
                 </div>`
-})
+};
+
+export default error;

@@ -1,4 +1,9 @@
-const app = new Vue({
+import search from './searchComponent';
+import cart from './cartComponent';
+import products from './productComponent';
+import error from './errorComponent'
+
+const app = {
     el: '#app',
     data: {
         catalogUrl: '/api/products',
@@ -11,6 +16,7 @@ const app = new Vue({
         isVisibleError: false,
         year: new Date().getFullYear()
     },
+    components: { cart, products, search, error },
     methods: {
         getJson(url) {
             return fetch(url)
@@ -85,24 +91,21 @@ const app = new Vue({
             }
         },
         removeProduct(element) {
-            let find = this.addedToCart.find(product => product.id_product === element.id_product);
-            if (find.quantity > 1) {
-                this.putJson(`${this.basketUrl}/${find.id_product}`, { quantity: -1 })
-                    .then(data => {
-                        if (data.result === 1) {
-                            find.quantity--;
-                        }
-                    })
-            } else {
-                this.deleteJson(`${this.basketUrl}/${find.id_product}`, { quantity: 1 })
-                    .then(data => {
-                        if (data.result === 1) {
-                            this.addedToCart.splice(this.addedToCart.indexOf(find), 1);
-                            if (this.addedToCart.length == 0) {
-                                this.isVisibleCart = false;
+            for (let i = 0; i < this.addedToCart.length; i++) {
+                if (this.addedToCart[i].id_product === +element.id_product) {
+                    this.deleteJson(`${this.basketUrl}/${this.addedToCart[i].id_product}`, this.addedToCart[i])
+                        .then(data => {
+                            if (data.result === 1) {
+                                this.addedToCart[i].quantity -= 1;
+                                if (this.addedToCart[i].quantity === 0) {
+                                    this.addedToCart.splice(i, 1);
+                                    if (this.addedToCart.length == 0) {
+                                        this.isVisibleCart = false;
+                                    }
+                                }
                             }
-                        }
-                    })
+                        })
+                }
             }
         }
     },
@@ -121,4 +124,6 @@ const app = new Vue({
                 }
             });
     }
-});  
+};
+
+export default app;
