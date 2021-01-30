@@ -1,0 +1,102 @@
+[
+  {
+    "id_product": 124,
+    "product_name": "Клавиатура",
+    "price": 1600
+  },
+  {
+    "id_product": 457,
+    "product_name": "Геймпад",
+    "price": 3000
+  },
+  {
+    "id_product": 123,
+    "product_name": "Ноутбук",
+    "price": 45600
+  },
+  {
+    "id_product": 456,
+    "product_name": "Мышка",
+    "price": 1000
+  },
+  {
+    "id_product": 125,
+    "product_name": "Чехол",
+    "price": 700
+  },
+  {
+    "id_product": 126,
+    "product_name": "Ноутбук",
+    "price": 3000
+  },
+  {
+    "id_product": 458,
+    "product_name": "Мышка",
+    "price": 45600
+  },
+  {
+    "id_product": 459,
+    "product_name": "Геймпад",
+    "price": 1000
+  },
+  {
+    "id_product": 1,
+    "product_name": "Suit",
+    "price": 5600
+  },
+  {
+    "id_product": 2,
+    "product_name": "Dress",
+    "price": 3000
+  },
+  {
+    "id_product": 3,
+    "product_name": "Coat",
+    "price": 2900
+  },
+  {
+    "id_product": 4,
+    "product_name": "Blaser",
+    "price": 1400
+  },
+  {
+    "id_product": 5,
+    "product_name": "Jacket",
+    "price": 2500
+  },
+  {
+    "id_product": 6,
+    "product_name": "Jacket",
+    "price": 3000
+  },
+  {
+    "id_product": 7,
+    "product_name": "Top",
+    "price": 900
+  },
+  {
+    "id_product": 8,
+    "product_name": "Dress",
+    "price": 1800
+  },
+  {
+    "id_product": 9,
+    "product_name": "Suit",
+    "price": 2000
+  },
+  {
+    "id_product": 10,
+    "product_name": "Suit",
+    "price": 3100
+  },
+  {
+    "id_product": 11,
+    "product_name": "Dress",
+    "price": 2200
+  },
+  {
+    "id_product": 12,
+    "product_name": "Dress",
+    "price": 3000
+  }
+]
